@@ -10,9 +10,9 @@ public:
 	void inputTriangle();
 	void outputTriangle();
 	double getAx() const;
-	void setAx(const double Ax);
+	void setAx(const double ax);
 	double getAy() const;
-	void setAy(const double Ay);
+	void setAy(const double ay);
 	double getA() const;
 	void setA(const double a);
 	double getB() const;
@@ -22,6 +22,6 @@ public:
 	bool checkIsoscelesNature(double a, double b);
 	void scaleTriangle(double& a, double& b);
 	double findLargerAngle(double a, double b);
-	bool checkSimillarity(RightTriangle other);
+	bool operator==(RightTriangle other)
 
 };
