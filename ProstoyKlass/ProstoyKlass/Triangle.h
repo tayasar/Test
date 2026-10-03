@@ -17,11 +17,11 @@ public:
 	void setA(const double a);
 	double getB() const;
 	void setB(const double b);
-	double computeHypotenuse(double a, double b);
-	double computePerimeter(double a, double b);
-	bool checkIsoscelesNature(double a, double b);
-	void scaleTriangle(double& a, double& b);
-	double findLargerAngle(double a, double b);
-	bool operator==(RightTriangle other)
+	double computeHypotenuse();
+	double computePerimeter();
+	bool checkIsoscelesNature();
+	void scaleTriangle(double e);
+	double findLargerAngle();
+	bool operator==(const RightTriangle& other) const;
 
 };

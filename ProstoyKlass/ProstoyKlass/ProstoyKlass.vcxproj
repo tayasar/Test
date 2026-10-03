@@ -124,7 +124,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
-    <ClCompile Include="Triangle.cpp" />
+    <ClCompile Include="Tirangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\4_tema\33\lib.h" />
