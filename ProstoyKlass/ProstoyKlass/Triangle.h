@@ -20,8 +20,8 @@ public:
 	double computeHypotenuse();
 	double computePerimeter();
 	bool checkIsoscelesNature();
-	void scaleTriangle(double e);
 	double findLargerAngle();
 	bool operator==(const RightTriangle& other) const;
+	RightTriangle& operator*(double e);
 
 };

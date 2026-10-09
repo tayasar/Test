@@ -36,8 +36,7 @@ int main()
 	double e;
 	cout << "Input a number for scaling:" << endl;
 	cin >> e;
-
-	RightTriangle1.scaleTriangle(e);
+	RightTriangle1 * e;
 	RightTriangle1.outputTriangle();
 	cout << "First triangle larger angle = " << RightTriangle1.findLargerAngle() << endl;
 

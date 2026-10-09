@@ -7,7 +7,7 @@ using namespace std;
 int main()
 
 {
-	int townCount, startingTown, finalCost, finalPath;
+	int townCount, startingTown;
 
     vector<int> visits(townCount);
 
@@ -20,17 +20,14 @@ int main()
 
     fillMatrix(townCount, priceMatrix);
 
-    for (int i = 0; i < townCount; i++)
-    {
-
-    }
-
+    bruteForce(pricematrix, startingTown)
    
 }
 
 void bruteForce(int townCount, int startingTown)
 {
-
+    int finalCost, finalPath;
+    next_permutation
 }
 
 void fillMatrix(int N, vector<vector<int>> matrix) 

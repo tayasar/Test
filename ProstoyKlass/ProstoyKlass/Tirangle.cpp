@@ -80,11 +80,6 @@ bool RightTriangle::checkIsoscelesNature()
 	return false;
 }
 
-void RightTriangle::scaleTriangle(double e)
-{
-	a_ *= e;
-	b_ *= e;
-}
 double RightTriangle::findLargerAngle()
 {
 	double first, second;
@@ -101,4 +96,11 @@ bool RightTriangle::operator==(const RightTriangle& other) const
 	if (a_ / other.a_ == b_ / other.b_)
 		return true;
 	return false;
+}
+
+RightTriangle& RightTriangle::operator*(double e) 
+{
+	a_ *= e;
+	b_ *= e;
+	return *this;
 }
