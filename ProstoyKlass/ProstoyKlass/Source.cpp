@@ -9,6 +9,10 @@ int main()
 	RightTriangle RightTriangle1;
 	RightTriangle RightTriangle2;
 
+	cout << RightTriangle1.getA() << endl;
+	RightTriangle1.setA(5);
+	cout << RightTriangle1.getA() << endl;
+
 	RightTriangle1.inputTriangle();
 	RightTriangle2.inputTriangle();
 	RightTriangle1.outputTriangle();

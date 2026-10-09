@@ -3,7 +3,7 @@
 class RightTriangle
 {
 private:
-	double ax_, ay_, a_, b_;
+	double ax_ = 0, ay_ = 0, a_ = 0, b_ = 0;
 public:
 	RightTriangle() = default;
 	RightTriangle(const double Ax, const double Ay, const double a, const double b);

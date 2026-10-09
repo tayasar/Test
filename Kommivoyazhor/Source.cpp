@@ -7,7 +7,7 @@ using namespace std;
 int main()
 
 {
-	int townCount, startingTown;
+	int townCount, startingTown, finalCost, finalPath;
 
     vector<int> visits(townCount);
 
@@ -20,6 +20,16 @@ int main()
 
     fillMatrix(townCount, priceMatrix);
 
+    for (int i = 0; i < townCount; i++)
+    {
+
+    }
+
+   
+}
+
+void bruteForce(int townCount, int startingTown)
+{
 
 }
 
@@ -31,17 +41,16 @@ void fillMatrix(int N, vector<vector<int>> matrix)
 
     uniform_int_distribution<int> distrib(1, 20);
 
-    for (int i = 0; i < N; ++i) {
-        for (int j = 0; j < N; ++j) {
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
             matrix[i][j] = distrib(gen); 
         }
     }
     cout << "Generated price matrix:";
-    for (int i = 0; i < N; ++i) {
-        for (int j = 0; j < N; ++j) {
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
             cout << matrix[i][j] << " ";
         }
         cout << endl;
     }
 }
-
