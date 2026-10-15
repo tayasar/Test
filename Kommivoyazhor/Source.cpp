@@ -5,8 +5,8 @@
 #include <algorithm>
 using namespace std;
 
-void fillMatrixRandom(int N, vector<vector<int>> matrix);
-int computePermutationCost(vector<vector<int>> matrix, vector<int> permutation);
+void fillMatrixRandom(int N, vector<vector<int>>& matrix);
+int computePermutationCost(const vector<vector<int>>& matrix, const vector<int>& permutation);
 
 //Полный перебор и жадный алгоритм
 
@@ -22,15 +22,15 @@ int main()
     chrono::steady_clock::time_point greedyAlgorithmEnd;
     chrono::nanoseconds greedyAlgorithmResultTime;
 
+    cout << "Input the number of towns" << endl;
+    cin >> townCount;
+
     vector<int> permutations(townCount);
     vector<int> greedyPermutation(townCount);
     vector<int> bestPermutation(townCount);
     vector<int> worstPermutation(townCount);
     vector<bool> visits(townCount, false);
    
-
-	cout << "Input the number of towns" << endl;
-	cin >> townCount;
     vector<vector<int>> priceMatrix(townCount, vector<int>(townCount));
 
     fillMatrixRandom(townCount, priceMatrix);
@@ -42,8 +42,8 @@ int main()
         if (k == startingTown) k++;
         permutations[i] = k;
     }
-    vector<int>bestPermutation = permutations;
-    vector<int>worstPermutation = permutations;
+    bestPermutation = permutations;
+    worstPermutation = permutations;
     bestCost = worstCost = computePermutationCost(priceMatrix, permutations);
     do
     {
@@ -96,7 +96,7 @@ int main()
     cout << "Greedy algorithm is " << accuracyPercentage << "% accurate" << endl;
 }
 
-void fillMatrixRandom(int N, vector<vector<int>> matrix)
+void fillMatrixRandom(int N, vector<vector<int>>& matrix)
 {
 
     random_device rd;
@@ -120,9 +120,9 @@ void fillMatrixRandom(int N, vector<vector<int>> matrix)
         cout << endl;
     }
 }
-int computePermutationCost(vector<vector<int>> matrix, vector<int> permutation)
+int computePermutationCost(const vector<vector<int>> &matrix, const vector<int>& permutation)
 {
-    int result;
+    int result = 0;
     for (int i = 0; i < permutation.size() - 1; i++)
     {
         result += matrix[permutation[i]][permutation[i + 1]];
