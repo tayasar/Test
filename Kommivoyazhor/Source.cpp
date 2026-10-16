@@ -7,6 +7,7 @@ using namespace std;
 
 void fillMatrixRandom(int N, vector<vector<int>>& matrix);
 int computePermutationCost(const vector<vector<int>>& matrix, const vector<int>& permutation);
+void outputPath(const vector<int>& permutation);
 
 //Полный перебор и жадный алгоритм
 
@@ -22,8 +23,13 @@ int main()
     chrono::steady_clock::time_point greedyAlgorithmEnd;
     chrono::nanoseconds greedyAlgorithmResultTime;
 
-    cout << "Input the number of towns" << endl;
+    cout << "Input the number of towns (number > 0): ";
     cin >> townCount;
+    if (townCount <= 0)
+    {
+        cout << "Error: invalid number of towns";
+        return 0;
+    }
 
     vector<int> permutations(townCount);
     vector<int> greedyPermutation(townCount);
@@ -58,12 +64,17 @@ int main()
             worstPermutation = permutations; 
             worstCost = currentCost; 
         }
-    } while (next_permutation(permutations.begin(), permutations.end()));
+    } while (next_permutation((permutations.begin() + 1), permutations.end()));
 
     bruteForceEnd = chrono::steady_clock::now();
     bruteForceResultTime = bruteForceEnd - bruteForceStart;
 
+    cout << "Brute force time: " << bruteForceResultTime.count() << " nanoseconds" << endl;
+    cout << "Brute force best path: ";
+    outputPath(bestPermutation);
     cout << "Best cost = " << bestCost << endl;
+    cout << "Brute force worst path: ";
+    outputPath(worstPermutation);
     cout << "Worst cost = " << worstCost << endl;
 
     greedyAlgorithmStart = chrono::steady_clock::now();
@@ -90,13 +101,20 @@ int main()
     greedyAlgorithmEnd = chrono::steady_clock::now();
     greedyAlgorithmResultTime = greedyAlgorithmEnd - greedyAlgorithmStart;
 
+    cout << "Greedy Algorithm time: " << greedyAlgorithmResultTime.count() << " nanoseconds" << endl;
+    cout << "Greedy Algorithm path: ";
+    outputPath(greedyPermutation);
     cout << "Greedy algorithm result cost = " << greedyAlgorithmCost << endl;
 
-    accuracyPercentage = 100 - (greedyAlgorithmCost - bestCost) * 100./ (worstCost - bestCost);
+    if (worstCost != bestCost)
+    {
+        accuracyPercentage = 100 - (greedyAlgorithmCost - bestCost) * 100. / (worstCost - bestCost);
+    }
+    else accuracyPercentage = 100;
     cout << "Greedy algorithm is " << accuracyPercentage << "% accurate" << endl;
 }
 
-void fillMatrixRandom(int N, vector<vector<int>>& matrix)
+void fillMatrixRandom(int townCount, vector<vector<int>>& matrix)
 {
 
     random_device rd;
@@ -104,16 +122,16 @@ void fillMatrixRandom(int N, vector<vector<int>>& matrix)
 
     uniform_int_distribution<int> distrib(1, 20);
 
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) 
+    for (int i = 0; i < townCount; i++) {
+        for (int j = 0; j < townCount; j++)
         {
             if (i == j) matrix[i][j] = 0;
             else matrix[i][j] = distrib(gen);
         }
     }
-    cout << "Generated price matrix:";
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) 
+    cout << "Generated price matrix:" << endl;
+    for (int i = 0; i < townCount; i++) {
+        for (int j = 0; j < townCount; j++)
         {
             cout << matrix[i][j] << " ";
         }
@@ -130,3 +148,9 @@ int computePermutationCost(const vector<vector<int>> &matrix, const vector<int>&
     result += matrix[permutation[permutation.size() - 1]][permutation[0]];
     return result;
 }
+void outputPath(const vector<int>& permutation)
+{
+    for (int i = 0; i < permutation.size(); i++)
+        cout << permutation[i] << " ";
+}
+
