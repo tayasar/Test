@@ -8,6 +8,7 @@ using namespace std;
 void fillMatrixRandom(int N, vector<vector<int>>& matrix);
 int computePermutationCost(const vector<vector<int>>& matrix, const vector<int>& permutation);
 void outputPath(const vector<int>& permutation);
+bool nextPermutation(vector<int>& permutation, int townCount);
 
 //Полный перебор и жадный алгоритм
 
@@ -64,7 +65,7 @@ int main()
             worstPermutation = permutations; 
             worstCost = currentCost; 
         }
-    } while (next_permutation((permutations.begin() + 1), permutations.end()));
+    } while (nextPermutation(permutations, townCount));
 
     bruteForceEnd = chrono::steady_clock::now();
     bruteForceResultTime = bruteForceEnd - bruteForceStart;
@@ -152,5 +153,22 @@ void outputPath(const vector<int>& permutation)
 {
     for (int i = 0; i < permutation.size(); i++)
         cout << permutation[i] << " ";
+}
+bool nextPermutation(vector<int>& permutation,  int townCount)
+{
+    int j = townCount - 1;
+    int i = townCount - 2;
+    while (0 < i && permutation[i] > permutation[i + 1])
+    {
+        i--;
+    }
+    if (i == 0) return false;
+    while (permutation[j] < permutation[i] && j > i)
+    {
+        j--;
+    }
+    swap(permutation[i], permutation[j]);
+    reverse(&permutation[i + 1], &permutation[townCount-1]);
+    return true;
 }
 
