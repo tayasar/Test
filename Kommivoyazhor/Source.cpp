@@ -44,8 +44,8 @@ int main()
     bruteForceStart = chrono::steady_clock::now();
 
     permutations[0] = startingTown;
-    for (int i = 1, k = 0; i < townCount; i++, k++) {
-        if (k == startingTown) k++;
+    for (int i = 1, k = 1; i < townCount; i++, k++) 
+    {
         permutations[i] = k;
     }
     bestPermutation = permutations;
