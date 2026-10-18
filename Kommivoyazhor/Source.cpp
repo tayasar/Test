@@ -168,7 +168,14 @@ bool nextPermutation(vector<int>& permutation,  int townCount)
         j--;
     }
     swap(permutation[i], permutation[j]);
-    reverse(&permutation[i + 1], &permutation[townCount-1]);
+    int l = i + 1;
+    int r = townCount - 1;
+    while (l < r) 
+    {
+        swap(permutation[l], permutation[r]);
+        l++;
+        r--;
+    }
     return true;
 }
 
