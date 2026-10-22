@@ -4,10 +4,11 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+const int ALPHABET_SIZE = 256;
 
-int findFirstIndex(string text, string image);
-vector<int> findAllIndex(string text, string image);
-vector<int> findIndexInRange(string text, string image, int start, int end);
+int findFirstIndex(const string& text, const string& image);
+vector<int> findAllIndex(const string& text, const string& image);
+vector<int> findIndexInRange(const string& text, const string& image, int start, int end);
 
 int main()
 {
@@ -33,23 +34,24 @@ int main()
 
 	restultFail4 = findIndexInRange("", "", 0, 11);
 	for (int idx : restultFail4) cout << idx << " ";
+
 }
 
-int findFirstIndex(string text, string image)
+int findFirstIndex(const string& text, const string& image)
 {
-	int TAB[256], i, m, n, k, j;
-	n = text.size(); m = image.size();
-	if (m == 0 || n == 0 || m > n) return -1;
+	int TAB[ALPHABET_SIZE], imageSize, textSize, i, k, j;
+	textSize = text.size(); imageSize = image.size();
+	if (imageSize == 0 || textSize == 0 || imageSize > textSize) return -1;
 
-	for (i = 0; i < 256; i++)
-		TAB[i] = m;
-	for (i = 0; i < m - 1; i++)
-		TAB[image[i]] = (m - 1 - i);
+	for (i = 0; i < ALPHABET_SIZE; i++)
+		TAB[i] = imageSize;
+	for (i = 0; i < imageSize - 1; i++)
+		TAB[image[i]] = (imageSize - 1 - i);
 
-	i = m - 1;
-	while (i < n)
+	i = imageSize - 1;
+	while (i < textSize)
 	{
-		k = i; j = m - 1;
+		k = i; j = imageSize - 1;
 		while (j >= 0)
 		{
 			if (text[k] == image[j])
@@ -66,27 +68,27 @@ int findFirstIndex(string text, string image)
 
 		else i += (TAB[text[i]]);
 	}
-	if (!(i < n)) return -1;
+	if (!(i < textSize)) return -1;
 }
 
-vector<int> findAllIndex(string text, string image)
+vector<int> findAllIndex(const string& text, const string& image)
 {
-	int TAB[256], i, m, n, k, j; bool indexOccurence = false;
+	int TAB[ALPHABET_SIZE], imageSize, textSize, i, k, j; bool indexOccurence = false;
 	vector<int> indexes;
-	n = text.size(); m = image.size();
-	if (m == 0 || n == 0 || m > n) { indexes.push_back(-1); return indexes; }
+	textSize = text.size(); imageSize = image.size();
+	if (imageSize == 0 || textSize == 0 || imageSize > textSize) { indexes.push_back(-1); return indexes; }
 	
 
-	for (i = 0; i < 256; i++)
-		TAB[i] = m;
-	for (i = 0; i < m - 1; i++)
-		TAB[image[i]] = (m - 1 - i);
+	for (i = 0; i < ALPHABET_SIZE; i++)
+		TAB[i] = imageSize;
+	for (i = 0; i < imageSize - 1; i++)
+		TAB[image[i]] = (imageSize - 1 - i);
 
-	i = m - 1;
-	while (i < n)
+	i = imageSize - 1;
+	while (i < textSize)
 	{
 		k = i; 
-		j = m - 1;
+		j = imageSize - 1;
 		while (j >= 0)
 		{
 			if (text[k] == image[j])
@@ -110,26 +112,26 @@ vector<int> findAllIndex(string text, string image)
 	return indexes;
 }
 
-vector<int> findIndexInRange(string text, string image, int start, int end)
+vector<int> findIndexInRange(const string& text, const string& image, int start, int end)
 {
-	int TAB[256], i, m, n, k, j; bool indexOccurence = false;
+	int TAB[ALPHABET_SIZE], imageSize, textSize, i, k, j; bool indexOccurence = false;
 	vector<int> indexes;
-	n = text.size(); m = image.size();
-	if (start > end || (end - start + 1) < m || m == 0 || n == 0 || m > n) { indexes.push_back(-1); return indexes; }
+	textSize = text.size(); imageSize = image.size();
+	if (start > end || (end - start + 1) < imageSize || imageSize == 0 || textSize == 0 || imageSize > textSize) { indexes.push_back(-1); return indexes; }
 	if (start < 0) start = 0; 
-	if (end >= n) end = n - 1;
+	if (end >= textSize) end = textSize - 1;
 	
 
-	for (i = 0; i < 256; i++)
-		TAB[i] = m;
-	for (i = 0; i < m - 1; i++)
-		TAB[image[i]] = (m - 1 - i);
+	for (i = 0; i < ALPHABET_SIZE; i++)
+		TAB[i] = imageSize;
+	for (i = 0; i < imageSize - 1; i++)
+		TAB[image[i]] = (imageSize - 1 - i);
 
-	i = start + m - 1;
+	i = start + imageSize - 1;
 	while (i <= end)
 	{
 		k = i;
-		j = m - 1;
+		j = imageSize - 1;
 		while (j >= 0)
 		{
 			if (text[k] == image[j])
